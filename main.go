@@ -25,10 +25,12 @@ type JWTPayload struct {
 	ExpiresAt Timestamp `json:"exp"` // Expiration Time
 }
 
+// Time returns the timestamp as a time.Time object
 func (t Timestamp) Time() time.Time {
 	return time.Unix(int64(t), 0)
 }
 
+// HumanReadable returns the timestamp as a human-readable string
 func (t Timestamp) HumanReadable() string {
 	return time.Unix(int64(t), 0).UTC().Format(time.RFC3339)
 }

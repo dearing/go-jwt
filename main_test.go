@@ -23,7 +23,6 @@ func TestJWT(t *testing.T) {
 	}
 
 	// Check that the decoded JWT matches the original one
-
 	if jwt.Header != decodedJwt.Header {
 		t.Errorf("Both JWT token headers should be equal  %v != %v", jwt, decodedJwt)
 	}
@@ -33,7 +32,6 @@ func TestJWT(t *testing.T) {
 	}
 
 	// Check that the decoded JWT has our chosen constants (constraints)
-
 	if decodedJwt.Header.Algorithm != "HS256" {
 		t.Errorf("JWT token algorithm should only be HS256  %v != %v", jwt.Header, "HS256")
 	}
@@ -43,13 +41,11 @@ func TestJWT(t *testing.T) {
 	}
 
 	// Check that the decoded JWT is handling as expected
-
 	if decodedJwt.Payload.ExpiresAt <= decodedJwt.Payload.IssuedAt {
 		t.Errorf("JWT token expiry should be later than issued date  %v >= %v", jwt.Payload.ExpiresAt, jwt.Payload.IssuedAt)
 	}
 
 	// Check that the expiry is one hour after the issued date
-
 	if time.Unix(int64(decodedJwt.Payload.ExpiresAt), 0).Sub(time.Unix(int64(decodedJwt.Payload.IssuedAt), 0)) != time.Hour {
 		t.Errorf("JWT token expiry should be 1 hour after issued date  %v != %v", time.Unix(int64(decodedJwt.Payload.ExpiresAt), 0).Sub(time.Unix(int64(decodedJwt.Payload.IssuedAt), 0)), time.Hour)
 	}
